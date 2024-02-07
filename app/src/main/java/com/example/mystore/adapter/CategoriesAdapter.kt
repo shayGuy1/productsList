@@ -15,7 +15,6 @@ import com.example.mystore.data.Product
 class CategoriesAdapter(private val items: List<Category>, private  val imageSize : Int , private val onItemClick: (List<Product>) -> Unit) :
     RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
-
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val categoryCard  : View = itemView.findViewById(R.id.categoryCard)
         private val textViewCategoryName: TextView = itemView.findViewById(R.id.textViewCategoryName)
