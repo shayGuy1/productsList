@@ -39,11 +39,11 @@ class DetailFragment : Fragment() {
 
         val id = arguments?.getLong(DETAIL_FRAGMENT_ARG_ITEM)
         id?.let {
-            fragmentsViewModel.requestDetailsData(id)
-            fragmentsViewModel.dataItemLiveData.observe(viewLifecycleOwner) {
-                titleTextView.text =
-                    "${it.terminalName}\n${it.approvalNumber}\n${it.amountPaid}\n${it.cardType}\n${it.currencyCode}\n${it.entryNumber}\n${it.price}\n..."
-            }
+//            fragmentsViewModel.requestDetailsData(id)
+//            fragmentsViewModel.dataItemLiveData.observe(viewLifecycleOwner) {
+//                titleTextView.text =
+//                    "${it.terminalName}\n${it.approvalNumber}\n${it.amountPaid}\n${it.cardType}\n${it.currencyCode}\n${it.entryNumber}\n${it.price}\n..."
+//            }
         }
 
         return view
