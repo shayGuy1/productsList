@@ -9,34 +9,47 @@ import com.example.mystore.api.ProductsService
 import com.example.mystore.api.data.ProductWS
 import com.example.mystore.api.data.ProductsResponse
 import com.example.mystore.api.maneger.RetrofitManager
+import com.example.mystore.application.App
 import com.example.mystore.data.Product
+import com.example.mystore.utils.NetworkUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
 
+
 class CategoryFragmentViewModel : ViewModel() {
 
+    companion object {
+        private const val PRODUCTS_MAX_COUNT = 100;
+    }
+
     private val listDataItemMutableLiveData = MutableLiveData<List<Category>>()
-    private val errorMessageMutableLiveData = MutableLiveData<Pair<String, String>>()
+    private val loadingErrorMessageMutableLiveData = MutableLiveData<String>()
+    private val loadingStatusMutableLiveData = MutableLiveData<Boolean>()
 
     val listDataItemLiveData: LiveData<List<Category>>
         get() = listDataItemMutableLiveData
 
-    val errorMessageLiveData: LiveData<Pair<String, String>>
-        get() = errorMessageMutableLiveData
+    val loadingErrorMessageLiveData: LiveData<String>
+        get() = loadingErrorMessageMutableLiveData
+
+    val loadingStatusLiveData: LiveData<Boolean>
+        get() = loadingStatusMutableLiveData
 
     fun requestListData() {
         viewModelScope.launch(Dispatchers.IO) {
-            requestListDatFromNetwork()
+            requestProducts()
         }
     }
 
-    private fun requestListDatFromNetwork() {
+    private fun requestProducts() {
+        loadingStatusMutableLiveData.postValue(true)
         val billingService = RetrofitManager.getInstance().create(ProductsService::class.java)
-        val call = billingService.getProducts(100)
+        val call = billingService.getProducts(PRODUCTS_MAX_COUNT)
         call.enqueue(object : retrofit2.Callback<ProductsResponse> {
             override fun onResponse(call: Call<ProductsResponse>, response: Response<ProductsResponse>) {
+                loadingStatusMutableLiveData.postValue(false)
                 if (response.isSuccessful) {
                     response.body()?.let {
                         val products = it.products
@@ -44,21 +57,27 @@ class CategoryFragmentViewModel : ViewModel() {
                         listDataItemMutableLiveData.postValue(categories)
                     } ?: {
                         // Handle empty body error
-                        errorMessageMutableLiveData.postValue(Pair("Error - Empty body", ""))
+                        loadingErrorMessageMutableLiveData.postValue("Server response returned with empty body")
                     }
                 } else {
                     // Handle unsuccessful response
-                    errorMessageMutableLiveData.postValue(Pair("Error - Bad response", "Response - ${response.code()}"))
+                    if (response.code() != 200) {
+                        loadingErrorMessageMutableLiveData.postValue("HTTP response error - " + response.code())
+                    } else {
+                        loadingErrorMessageMutableLiveData.postValue("Failed to load products data from the server")
+                    }
                 }
             }
 
             override fun onFailure(call: Call<ProductsResponse>, t: Throwable) {
-                //Asher please make it better
-                errorMessageMutableLiveData.postValue(Pair("", t.message ?: "General Error"))
+                loadingStatusMutableLiveData.postValue(false)
+                if (NetworkUtils.isOffline(App.getContext())) {
+                    loadingErrorMessageMutableLiveData.postValue("Device is offline. Please check your internet settings and try again")
+                } else {
+                    loadingErrorMessageMutableLiveData.postValue(t.localizedMessage)
+                }
             }
-
         })
-
     }
 
     private fun createCategories(products: List<ProductWS>): List<Category> {

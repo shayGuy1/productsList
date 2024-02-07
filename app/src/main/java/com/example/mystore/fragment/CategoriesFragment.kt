@@ -33,8 +33,11 @@ class CategoriesFragment : Fragment() {
             }
             recyclerView.adapter = adapter
         }
-        categoryFragmentViewModel.errorMessageLiveData.observe(viewLifecycleOwner) {
-
+        categoryFragmentViewModel.loadingErrorMessageLiveData.observe(viewLifecycleOwner) {message ->
+            showErrorDialog(title = "Loading error", message = message);
+        }
+        categoryFragmentViewModel.loadingStatusLiveData.observe(viewLifecycleOwner) {loading ->
+            setLoaderVisibility(loading)
         }
         categoryFragmentViewModel.requestListData()
         return view

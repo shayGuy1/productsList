@@ -13,6 +13,7 @@ object DialogHelper {
                 dialog.dismiss()
             }
             .setIcon(android.R.drawable.ic_dialog_alert)
+            .setCancelable(false)
             .show()
     }
 }
