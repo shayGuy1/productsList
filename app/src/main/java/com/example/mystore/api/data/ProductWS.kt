@@ -1,8 +1,8 @@
-package com.example.mystore.retrofit.data
+package com.example.mystore.api.data
 
 import com.google.gson.annotations.SerializedName
 
-class Product(
+class ProductWS(
     @SerializedName("id")
     val id: Int,
     @SerializedName("title")

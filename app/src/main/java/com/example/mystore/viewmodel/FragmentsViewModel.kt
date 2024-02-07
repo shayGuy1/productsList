@@ -5,10 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mystore.data.Category
-import com.example.mystore.retrofit.ProductsService
-import com.example.mystore.retrofit.data.Product
-import com.example.mystore.retrofit.data.ProductsResponse
-import com.example.mystore.retrofit.maneger.RetrofitManager
+import com.example.mystore.api.ProductsService
+import com.example.mystore.api.data.ProductWS
+import com.example.mystore.api.data.ProductsResponse
+import com.example.mystore.api.maneger.RetrofitManager
+import com.example.mystore.data.Product
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -58,7 +59,7 @@ class FragmentsViewModel : ViewModel() {
 
     }
 
-    private fun createCategories(products: List<Product>): List<Category> {
+    private fun createCategories(products: List<ProductWS>): List<Category> {
         val categories = HashMap<String, Category>()
 
         products.forEach { product ->
@@ -75,7 +76,7 @@ class FragmentsViewModel : ViewModel() {
                 category.totalDistinct += product.stock
 
                 category.products.add(
-                    com.example.mystore.data.Product(
+                    Product(
                         name = product.title,
                         imageUrl = product.thumbnail,
                         price = product.price,
