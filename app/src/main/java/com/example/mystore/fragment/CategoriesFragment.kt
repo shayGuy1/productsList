@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mystore.R
 import com.example.mystore.activity.MainActivity
 import com.example.mystore.adapter.CategoriesAdapter
+import com.example.mystore.dialog.DialogHelper
 import com.example.mystore.viewmodel.CategoryFragmentViewModel
 
 class CategoriesFragment : Fragment() {
@@ -23,11 +24,16 @@ class CategoriesFragment : Fragment() {
         val imageSize = resources.getDimensionPixelSize(R.dimen.image_category_size)
 
         categoryFragmentViewModel = ViewModelProvider(this)[CategoryFragmentViewModel::class.java]
-        categoryFragmentViewModel.listDataItemLiveData.observe(viewLifecycleOwner){
+        categoryFragmentViewModel.listDataItemLiveData.observe(viewLifecycleOwner) {
             val adapter = CategoriesAdapter(it, imageSize) { item ->
                 (activity as? MainActivity)?.showDetailFragment(item)
             }
             recyclerView.adapter = adapter
+        }
+        categoryFragmentViewModel.errorMessageLiveData.observe(viewLifecycleOwner) {
+            context?.let { context ->
+                DialogHelper.showErrorDialog(context, it.first, it.second)
+            }
         }
         categoryFragmentViewModel.requestListData()
         return view

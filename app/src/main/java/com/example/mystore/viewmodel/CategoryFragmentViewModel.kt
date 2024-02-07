@@ -18,11 +18,13 @@ import retrofit2.Response
 class CategoryFragmentViewModel : ViewModel() {
 
     private val listDataItemMutableLiveData = MutableLiveData<List<Category>>()
-
+    private val errorMessageMutableLiveData = MutableLiveData<Pair<String, String>>()
 
     val listDataItemLiveData: LiveData<List<Category>>
         get() = listDataItemMutableLiveData
 
+    val errorMessageLiveData: LiveData<Pair<String, String>>
+        get() = errorMessageMutableLiveData
 
     fun requestListData() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -34,10 +36,7 @@ class CategoryFragmentViewModel : ViewModel() {
         val billingService = RetrofitManager.getInstance().create(ProductsService::class.java)
         val call = billingService.getProducts(100)
         call.enqueue(object : retrofit2.Callback<ProductsResponse> {
-            override fun onResponse(call: Call<ProductsResponse>,
-                response: Response<ProductsResponse>
-            ) {
-
+            override fun onResponse(call: Call<ProductsResponse>, response: Response<ProductsResponse>) {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         val products = it.products
@@ -45,14 +44,17 @@ class CategoryFragmentViewModel : ViewModel() {
                         listDataItemMutableLiveData.postValue(categories)
                     } ?: {
                         // Handle empty body error
+                        errorMessageMutableLiveData.postValue(Pair("Error - Empty body", ""))
                     }
                 } else {
                     // Handle unsuccessful response
+                    errorMessageMutableLiveData.postValue(Pair("Error - Bad response", "Response - ${response.code()}"))
                 }
             }
 
             override fun onFailure(call: Call<ProductsResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                //Asher please make it better
+                errorMessageMutableLiveData.postValue(Pair("", t.message ?: "General Error"))
             }
 
         })
