@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,7 @@ import com.example.mystore.viewmodel.CategoryFragmentViewModel
 class CategoriesFragment : Fragment() {
 
     private lateinit var categoryFragmentViewModel : CategoryFragmentViewModel
+    private lateinit var loader : ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -23,6 +25,7 @@ class CategoriesFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         val imageSize = resources.getDimensionPixelSize(R.dimen.image_category_size)
 
+        loader = view.findViewById(R.id.progressBar)
         categoryFragmentViewModel = ViewModelProvider(this)[CategoryFragmentViewModel::class.java]
         categoryFragmentViewModel.listDataItemLiveData.observe(viewLifecycleOwner) {
             val adapter = CategoriesAdapter(it, imageSize) { item ->
@@ -31,12 +34,20 @@ class CategoriesFragment : Fragment() {
             recyclerView.adapter = adapter
         }
         categoryFragmentViewModel.errorMessageLiveData.observe(viewLifecycleOwner) {
-            context?.let { context ->
-                DialogHelper.showErrorDialog(context, it.first, it.second)
-            }
+
         }
         categoryFragmentViewModel.requestListData()
         return view
+    }
+
+    private fun setLoaderVisibility(isVisible : Boolean) {
+        loader.visibility = if (isVisible) View.VISIBLE else View.GONE
+    }
+
+    private fun showErrorDialog(title: String, message: String) {
+        context?.let {
+            DialogHelper.showErrorDialog(it, title, message)
+        }
     }
 
 }
