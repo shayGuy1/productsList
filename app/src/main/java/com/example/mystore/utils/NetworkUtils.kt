@@ -6,10 +6,10 @@ import android.net.NetworkCapabilities
 
 class NetworkUtils {
     companion object {
-        fun isOnline(context: Context): Boolean {
+        private fun isOnline(context: Context): Boolean {
             val connectivityManager =
-                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            if (connectivityManager != null) {
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
+            connectivityManager?.let {
                 val capabilities =
                     connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
                 if (capabilities != null) {
@@ -26,7 +26,7 @@ class NetworkUtils {
         }
 
         fun isOffline(context: Context): Boolean {
-            return !isOnline(context = context);
+            return !isOnline(context = context)
         }
     }
 }

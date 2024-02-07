@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ProjectForIterview"
+rootProject.name = "MyStore"
 include(":app")
  

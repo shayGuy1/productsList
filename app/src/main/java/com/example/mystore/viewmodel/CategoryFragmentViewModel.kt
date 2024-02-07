@@ -22,7 +22,7 @@ import retrofit2.Response
 class CategoryFragmentViewModel : ViewModel() {
 
     companion object {
-        private const val PRODUCTS_MAX_COUNT = 100;
+        private const val PRODUCTS_MAX_COUNT = 100
     }
 
     private val listDataItemMutableLiveData = MutableLiveData<List<Category>>()
