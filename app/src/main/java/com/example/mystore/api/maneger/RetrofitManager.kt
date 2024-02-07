@@ -8,6 +8,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitManager {
 
+    // The Retrofit instance below will cache all responses until it reached the 10 MB maximum.
+    // After it exceeded the cache disk limit, it'll clean up the oldest entries.
+    // OkHttp will automatically apply Etag, Cache-Control, etc logic on every request for us.
+    // If the resource stayed the same, it won't be loaded again
+
     private const val CACHE_SIZE = 10 * 1024 * 1024L // 10MB
 
     private val retrofit : Retrofit = Retrofit.Builder()
