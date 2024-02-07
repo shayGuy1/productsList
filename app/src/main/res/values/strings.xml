@@ -4,4 +4,6 @@
     <string name="currency">%1$s USD</string>
     <string name="total_products">Total products: %1$s</string>
     <string name="total_stock">Total stock: %1$s</string>
+    <string name="retry">Retry</string>
+    <string name="cancel">Cancel</string>
 </resources>

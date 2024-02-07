@@ -2,6 +2,7 @@ package com.example.mystore.dialog
 
 import android.app.AlertDialog
 import android.content.Context
+import com.example.mystore.R
 
 object DialogHelper {
     enum class ResultCode {
@@ -11,11 +12,11 @@ object DialogHelper {
         AlertDialog.Builder(context)
             .setTitle(title)
             .setMessage(message)
-            .setPositiveButton("Retry") { dialog, _ ->
+            .setPositiveButton(context.getString(R.string.retry)) { dialog, _ ->
                 listener.invoke(ResultCode.Retry)
                 dialog.dismiss()
             }
-            .setNegativeButton("Cancel") { dialog, _ ->
+            .setNegativeButton(context.getString(R.string.cancel)) { dialog, _ ->
                 listener.invoke(ResultCode.Cancel)
                 dialog.dismiss()
             }
