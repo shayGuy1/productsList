@@ -52,5 +52,4 @@ class CategoriesFragment : Fragment() {
             DialogHelper.showErrorDialog(it, title, message)
         }
     }
-
 }

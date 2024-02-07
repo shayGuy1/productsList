@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import javax.net.ssl.HttpsURLConnection
 import com.example.mystore.data.Category
 import com.example.mystore.api.ProductsService
 import com.example.mystore.api.data.ProductWS
@@ -59,9 +60,8 @@ class CategoryFragmentViewModel : ViewModel() {
                         // Handle empty body error
                         loadingErrorMessageMutableLiveData.postValue("Server response returned with empty body")
                     }
-                } else {
-                    // Handle unsuccessful response
-                    if (response.code() != 200) {
+                } else { // On response failed
+                    if (response.code() != HttpsURLConnection.HTTP_OK) {
                         loadingErrorMessageMutableLiveData.postValue("HTTP response error - " + response.code())
                     } else {
                         loadingErrorMessageMutableLiveData.postValue("Failed to load products data from the server")
