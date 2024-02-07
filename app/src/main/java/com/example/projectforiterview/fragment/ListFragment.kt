@@ -24,11 +24,10 @@ class ListFragment : Fragment() {
         fragmentsViewModel = ViewModelProvider(this)[FragmentsViewModel::class.java]
 
         fragmentsViewModel.listDataItemLiveData.observe(viewLifecycleOwner){
-            val d = 0
-//            val adapter = ListAdapter(it) { item ->
-//                (activity as? MainActivity)?.showDetailFragment(item)
-//            }
-//            recyclerView.adapter = adapter
+            val adapter = ListAdapter(it) { item ->
+                (activity as? MainActivity)?.showDetailFragment(item)
+            }
+            recyclerView.adapter = adapter
         }
         fragmentsViewModel.requestListData()
         return view
