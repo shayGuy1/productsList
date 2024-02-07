@@ -6,18 +6,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projectforiterview.R
-import com.example.projectforiterview.retrofit.data.BillingEntryHeader
+import com.example.projectforiterview.data.Category
 
-class ListAdapter(private val items: List<BillingEntryHeader>, private val onItemClick: (Long) -> Unit) :
+class ListAdapter(private val items: List<Category>, private val onItemClick: (Long) -> Unit) :
     RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textMiddle: TextView = itemView.findViewById(R.id.textMiddle)
 
-        fun bind(data: BillingEntryHeader) {
-            textMiddle.text = "${data.currencyCode} ${data.created}"
+        fun bind(data: Category) {
+//            textMiddle.text = "${data.currencyCode} ${data.created}"
 
-            itemView.setOnClickListener { onItemClick(data.id) }
+//            itemView.setOnClickListener { onItemClick(data.id) }
         }
     }
 
