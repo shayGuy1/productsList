@@ -20,10 +20,11 @@ class CategoriesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.list_fragment, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        val imageSize = resources.getDimensionPixelSize(R.dimen.image_category_size)
 
         categoryFragmentViewModel = ViewModelProvider(this)[CategoryFragmentViewModel::class.java]
         categoryFragmentViewModel.listDataItemLiveData.observe(viewLifecycleOwner){
-            val adapter = CategoriesAdapter(it) { item ->
+            val adapter = CategoriesAdapter(it, imageSize) { item ->
                 (activity as? MainActivity)?.showDetailFragment(item)
             }
             recyclerView.adapter = adapter

@@ -8,7 +8,7 @@ import retrofit2.http.Query
 interface ProductsService {
 
     @GET("/products")
-    fun getProducts(@Query("limit") limit: Int, ): Call<ProductsResponse>
+    fun getProducts(@Query("limit") limit: Int): Call<ProductsResponse>
 }
 
 

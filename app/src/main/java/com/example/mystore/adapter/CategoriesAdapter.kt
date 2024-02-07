@@ -7,11 +7,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.mystore.R
 import com.example.mystore.data.Category
+import com.example.mystore.data.Product
 
-class CategoriesAdapter(private val items: List<Category>, private val onItemClick: (Category) -> Unit) :
+class CategoriesAdapter(private val items: List<Category>, private  val imageSize : Int , private val onItemClick: (List<Product>) -> Unit) :
     RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
+
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val categoryCard  : View = itemView.findViewById(R.id.categoryCard)
@@ -25,8 +28,9 @@ class CategoriesAdapter(private val items: List<Category>, private val onItemCli
             textViewTotalStock.text = "Total stock: ${data.totalInStock}"
             Glide.with(textViewTotalProducts.context)
                 .load(data.imageUrl)
+                .apply(RequestOptions().override(imageSize, imageSize))
                 .into(imageViewThumbnail)
-            categoryCard.setOnClickListener { onItemClick(data) }
+            categoryCard.setOnClickListener { onItemClick(data.products) }
         }
     }
 
