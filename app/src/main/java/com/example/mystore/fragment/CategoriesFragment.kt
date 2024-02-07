@@ -49,7 +49,13 @@ class CategoriesFragment : Fragment() {
 
     private fun showErrorDialog(title: String, message: String) {
         context?.let {
-            DialogHelper.showErrorDialog(it, title, message)
+            DialogHelper.showErrorDialog(it, title, message) { resultCode ->
+                if (resultCode == 0) {
+                    categoryFragmentViewModel.requestListData()
+                } else {
+                    activity?.finish()
+                }
+            }
         }
     }
 }
