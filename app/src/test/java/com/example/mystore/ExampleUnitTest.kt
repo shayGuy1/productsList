@@ -1,4 +1,4 @@
-package com.example.projectforiterview
+package com.example.mystore
 
 import org.junit.Test
 

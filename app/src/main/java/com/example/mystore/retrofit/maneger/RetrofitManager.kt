@@ -1,4 +1,4 @@
-package com.example.projectforiterview.retrofit.maneger
+package com.example.mystore.retrofit.maneger
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

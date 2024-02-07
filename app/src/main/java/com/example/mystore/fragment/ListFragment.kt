@@ -1,4 +1,4 @@
-package com.example.projectforiterview.fragment
+package com.example.mystore.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.example.projectforiterview.R
-import com.example.projectforiterview.activity.MainActivity
-import com.example.projectforiterview.adapter.ListAdapter
-import com.example.projectforiterview.viewmodel.FragmentsViewModel
+import com.example.mystore.R
+import com.example.mystore.activity.MainActivity
+import com.example.mystore.adapter.ListAdapter
+import com.example.mystore.viewmodel.FragmentsViewModel
 
 class ListFragment : Fragment() {
 

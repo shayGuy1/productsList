@@ -1,4 +1,4 @@
-package com.example.projectforiterview.retrofit.data
+package com.example.mystore.retrofit.data
 
 import com.google.gson.annotations.SerializedName
 

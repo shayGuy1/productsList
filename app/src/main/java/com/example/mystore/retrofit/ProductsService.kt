@@ -1,6 +1,6 @@
-package com.example.projectforiterview.retrofit
+package com.example.mystore.retrofit
 
-import com.example.projectforiterview.retrofit.data.ProductsResponse
+import com.example.mystore.retrofit.data.ProductsResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -1,10 +1,10 @@
-package com.example.projectforiterview.activity
+package com.example.mystore.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.projectforiterview.R
-import com.example.projectforiterview.fragment.DetailFragment
-import com.example.projectforiterview.fragment.ListFragment
+import com.example.mystore.R
+import com.example.mystore.fragment.DetailFragment
+import com.example.mystore.fragment.ListFragment
 
 class MainActivity : AppCompatActivity() {
 

@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.projectforiterview"
+    namespace = "com.example.mystore"
     compileSdk = 34
 
     dataBinding {
@@ -14,7 +14,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.projectforiterview"
+        applicationId = "com.example.mystore"
         minSdk = 24
         targetSdk = 33
         versionCode = 1

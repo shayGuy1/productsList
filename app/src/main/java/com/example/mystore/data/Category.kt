@@ -1,4 +1,4 @@
-package com.example.projectforiterview.data
+package com.example.mystore.data
 
 data class Category(
     val name : String,

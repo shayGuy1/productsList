@@ -1,14 +1,14 @@
-package com.example.projectforiterview.viewmodel
+package com.example.mystore.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.projectforiterview.data.Category
-import com.example.projectforiterview.retrofit.ProductsService
-import com.example.projectforiterview.retrofit.data.Product
-import com.example.projectforiterview.retrofit.data.ProductsResponse
-import com.example.projectforiterview.retrofit.maneger.RetrofitManager
+import com.example.mystore.data.Category
+import com.example.mystore.retrofit.ProductsService
+import com.example.mystore.retrofit.data.Product
+import com.example.mystore.retrofit.data.ProductsResponse
+import com.example.mystore.retrofit.maneger.RetrofitManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -75,7 +75,7 @@ class FragmentsViewModel : ViewModel() {
                 category.totalDistinct += product.stock
 
                 category.products.add(
-                    com.example.projectforiterview.data.Product(
+                    com.example.mystore.data.Product(
                         name = product.title,
                         imageUrl = product.thumbnail,
                         price = product.price,
