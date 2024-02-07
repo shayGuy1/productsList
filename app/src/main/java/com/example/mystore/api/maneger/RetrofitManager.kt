@@ -13,6 +13,10 @@ object RetrofitManager {
     // OkHttp will automatically apply Etag, Cache-Control, etc logic on every request for us.
     // If the resource stayed the same, it won't be loaded again
 
+    // Note that this kind of cache will still perform a network call to check modifications.
+    // But instead of getting the entire response's body over and over again,
+    // it will get only the required headers (HEAD call) and check with them.
+
     private const val CACHE_SIZE = 10 * 1024 * 1024L // 10MB
 
     private val retrofit : Retrofit = Retrofit.Builder()
