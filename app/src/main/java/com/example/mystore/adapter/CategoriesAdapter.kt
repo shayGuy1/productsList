@@ -20,9 +20,9 @@ class CategoriesAdapter(private val items: List<Category>, private val onItemCli
         private val textViewTotalStock: TextView = itemView.findViewById(R.id.textViewTotalStock)
         private val imageViewThumbnail : ImageView = itemView.findViewById(R.id.imageViewThumbnail)
         fun bind(data: Category) {
-            textViewCategoryName.text = "Category: ${data.name}"
-            textViewTotalStock.text = "Total stock of: ${data.getTotalStock()}"
-            textViewTotalProducts.text = "Total products of: ${data.totalDistinct}"
+            textViewCategoryName.text = data.name
+            textViewTotalProducts.text = "Total products: ${data.getDistinctCount()}"
+            textViewTotalStock.text = "Total stock: ${data.totalInStock}"
             Glide.with(textViewTotalProducts.context)
                 .load(data.imageUrl)
                 .into(imageViewThumbnail)

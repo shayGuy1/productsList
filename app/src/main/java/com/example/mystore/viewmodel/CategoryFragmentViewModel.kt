@@ -73,7 +73,7 @@ class CategoryFragmentViewModel : ViewModel() {
 
             // add the new product to the category's products list
             categories[product.category]?.let {category ->
-                category.totalDistinct += product.stock
+                category.totalInStock += product.stock
 
                 category.products.add(
                     Product(
@@ -84,6 +84,7 @@ class CategoryFragmentViewModel : ViewModel() {
                     )
                 )
 
+                // Since we are using data class, we need to set back the modified data object into the map.
                 categories[product.category] = category
             }
         }

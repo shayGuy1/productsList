@@ -7,8 +7,8 @@ import kotlinx.android.parcel.Parcelize
 data class Category(
     val name : String,
     val imageUrl : String,
-    var totalDistinct : Int = 0,
+    var totalInStock : Int = 0,
     val products: MutableList<Product> = mutableListOf()
 ) : Parcelable {
-    fun getTotalStock () = products.size
+    fun getDistinctCount () = products.size
 }
