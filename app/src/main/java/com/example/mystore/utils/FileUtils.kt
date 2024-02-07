@@ -1,14 +1,14 @@
 package com.example.mystore.utils
 
 import com.example.mystore.api.data.ProductsResponse
-import com.example.mystore.application.AppApplication
+import com.example.mystore.application.App
 import com.google.gson.Gson
 import java.io.*
 
 object FileUtils {
 
     fun saveProductsToStorage(json: String) {
-        val yourFilePath: String = AppApplication.getAppContext().filesDir.toString() + "/products_data_file"
+        val yourFilePath: String = App.getAppContext().filesDir.toString() + "/products_data_file"
         val yourFile = File(yourFilePath)
         if (yourFile.exists())
             yourFile.delete()
@@ -21,7 +21,7 @@ object FileUtils {
     fun loadProductsFromStorage(): ProductsResponse? {
         val text: String
         try {
-            val yourFilePath: String = AppApplication.getAppContext().filesDir.toString() + "/products_data_file"
+            val yourFilePath: String = App.getAppContext().filesDir.toString() + "/products_data_file"
             val yourFile = File(yourFilePath)
             val inputStream: InputStream = FileInputStream(yourFile)
             val stringBuilder = StringBuilder()

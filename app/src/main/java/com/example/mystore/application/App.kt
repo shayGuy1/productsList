@@ -3,10 +3,10 @@ package com.example.mystore.application
 import android.app.Application
 import android.content.Context
 
-class AppApplication : Application() {
+class App : Application() {
 
     companion object {
-        private lateinit var instance: AppApplication
+        private lateinit var instance: App
 
         fun getAppContext(): Context {
             return instance.applicationContext
