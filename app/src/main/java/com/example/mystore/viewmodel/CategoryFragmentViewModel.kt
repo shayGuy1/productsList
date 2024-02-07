@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
 
-class FragmentsViewModel : ViewModel() {
+class CategoryFragmentViewModel : ViewModel() {
 
     private val listDataItemMutableLiveData = MutableLiveData<List<Category>>()
 

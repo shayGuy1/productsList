@@ -3,8 +3,9 @@ package com.example.mystore.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mystore.R
-import com.example.mystore.fragment.DetailFragment
-import com.example.mystore.fragment.ListFragment
+import com.example.mystore.data.Category
+import com.example.mystore.fragment.ProductsFragment
+import com.example.mystore.fragment.CategoriesFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,28 +13,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, ListFragment())
+                .replace(R.id.container, CategoriesFragment())
                 .commit()
 
     }
 
-    fun showDetailFragment(id: Long) {
-
+    fun showDetailFragment(category: Category) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-
-        // Specify the animations
-        fragmentTransaction.setCustomAnimations(
-            R.anim.slide_in,  // Enter from left
-            R.anim.fade_out, // Exit to right
-            R.anim.fade_in,  // Enter from right
-            R.anim.slide_out // Pop exit animation
-        )
-
-        // Replace or add your fragments
-        fragmentTransaction.replace(R.id.container, DetailFragment.newInstance(id))
-        fragmentTransaction.addToBackStack(DetailFragment::class.simpleName)
-
-        // Commit the transaction
+        fragmentTransaction.setCustomAnimations(R.anim.slide_in, R.anim.fade_out, R.anim.fade_in, R.anim.slide_out)
+        fragmentTransaction.add(R.id.container, ProductsFragment.newInstance(category))
+        fragmentTransaction.addToBackStack(ProductsFragment::class.simpleName)
         fragmentTransaction.commit()
     }
 }

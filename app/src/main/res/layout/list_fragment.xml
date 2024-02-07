@@ -14,6 +14,6 @@
         android:padding="16dp"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_list" />
+        tools:listitem="@layout/categories_item_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
