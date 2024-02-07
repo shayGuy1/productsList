@@ -23,8 +23,9 @@ class CategoriesAdapter(private val items: List<Category>, private  val imageSiz
         private val imageViewThumbnail : ImageView = itemView.findViewById(R.id.imageViewThumbnail)
         fun bind(data: Category) {
             textViewCategoryName.text = data.name
-            textViewTotalProducts.text = "Total products: ${data.getDistinctCount()}"
-            textViewTotalStock.text = "Total stock: ${data.totalInStock}"
+            textViewTotalProducts.text =
+                itemView.context.getString(R.string.total_products, data.getDistinctCount().toString())
+            textViewTotalStock.text = itemView.context.getString(R.string.total_stock, data.totalInStock.toString())
             Glide.with(textViewTotalProducts.context)
                 .load(data.imageUrl)
                 .apply(RequestOptions().override(imageSize, imageSize))

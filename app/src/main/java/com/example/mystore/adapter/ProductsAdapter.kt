@@ -20,8 +20,10 @@ class ProductsAdapter(private val items: List<Product>, val imageSize: Int) : Re
         private val imageViewProducts : ImageView = itemView.findViewById(R.id.imageViewProducts)
         fun bind(data: Product) {
             textViewProductsName.text = data.name
-            textViewPrice.text = "${data.price} USD"
-            textViewAvailableStock.text = "Available in stock: ${data.stockQuantity}"
+            textViewPrice.text =
+                itemView.context.getString(R.string.currency, data.price.toString())
+            textViewAvailableStock.text =
+                itemView.context.getString(R.string.available_in_stock, data.stockQuantity.toString())
             Glide.with(imageViewProducts.context)
                 .load(data.imageUrl)
                 .apply(RequestOptions().override(imageSize, imageSize))

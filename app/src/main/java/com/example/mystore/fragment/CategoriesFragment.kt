@@ -50,7 +50,7 @@ class CategoriesFragment : Fragment() {
     private fun showErrorDialog(title: String, message: String) {
         context?.let {
             DialogHelper.showErrorDialog(it, title, message) { resultCode ->
-                if (resultCode == 0) {
+                if (resultCode == DialogHelper.ResultCode.Retry) {
                     categoryFragmentViewModel.requestListData()
                 } else {
                     activity?.finish()
